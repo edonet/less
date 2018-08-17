@@ -1,13 +1,13 @@
 {
     "name": "@arted/less",
-    "version": "0.0.1",
+    "version": "0.0.101",
     "description": "transform less to css",
     "main": "lib/index.js",
     "bin": {
-        "less": "./scripts/less.js"
+        "lessc": "./scripts/less.js"
     },
     "scripts": {
-        "less": "node ./scripts/less.js"
+        "lessc": "node ./scripts/less.js"
     },
     "repository": "git@github.com:edonet/less.git",
     "author": "edonet <edonet@163.com>",
