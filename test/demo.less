@@ -1,0 +1,224 @@
+/**
+ *************************************
+ * 配置基础样式
+ *************************************
+ */
+
+/* 盒子样式 */
+.box {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* fixed 布局 */
+.fixed:extend(.box) {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* absolute 布局 */
+.abs {
+    display: block;
+    position: absolute;
+}
+
+/* relative 布局 */
+.rel {
+    display: block;
+    position: relative;
+}
+
+/**
+ ************************************
+ * flex 布局
+ ************************************
+ */
+
+/* row 布局 */
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* column 布局 */
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+/* flex 布局 */
+.flex {
+    flex: 1 1 auto;
+}
+
+/* 锁定尺寸 */
+.lock {
+    flex: 0 0 auto;
+}
+
+/* 剧中布局 */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/**
+ ************************************
+ * 浮动设置
+ ************************************
+ */
+.fl { float: left; }
+.fr { float: right; }
+.clear {
+    clear: both;
+
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+}
+
+
+/**
+ ************************************
+ * 文本设置
+ ************************************
+ */
+
+/* 文本对齐样式 */
+.tl { text-align: left; }
+.tc { text-align: center; }
+.tr { text-align: right; }
+.md { vertical-align: middle; }
+.tt { vertical-align: text-top; }
+.tb { vertical-align: text-bottom; }
+
+/* 不换行 */
+.nowrap {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
+/**
+ ************************************
+ * 隐藏设置
+ ************************************
+ */
+.hd { visibility: hidden; }
+.ovhd { overflow: hidden; }
+.hide { display: none; }
+
+
+/**
+ *************************************
+ * 字体大小预设
+ *************************************
+ */
+.make-font-size();
+.make-font-size(@list: 12 14 16 18 21 24, @idx: 1) when(@idx <= length(@list)) {
+    @size: extract(@list, @idx);
+
+    .f@{size} {
+        font-size: @size * 1px !important;
+    }
+
+    .make-font-size(@list, @idx + 1);
+}
+
+
+/**
+ ************************************
+ * margin 布局
+ ************************************
+ */
+.make-margin();
+.make-margin(@size: 5) when (@size < 50) {
+    .ml@{size}, .mh@{size}, .m@{size} {
+        margin-left: @size * 1px;
+    }
+    .mr@{size}, .mh@{size}, .m@{size} {
+        margin-right: @size * 1px;
+    }
+    .mt@{size}, .mv@{size}, .m@{size} {
+        margin-top: @size * 1px;
+    }
+    .mb@{size}, .mv@{size}, .m@{size} {
+        margin-bottom: @size * 1px;
+    }
+
+    .make-margin(@size + 5);
+}
+
+/**
+ ************************************
+ * padding 布局
+ ************************************
+ */
+.make-padding();
+.make-padding(@size: 5) when (@size < 50) {
+    .pl@{size}, .ph@{size}, .p@{size} {
+        margin-left: @size * 1px;
+    }
+    .pr@{size}, .ph@{size}, .p@{size} {
+        margin-right: @size * 1px;
+    }
+    .pt@{size}, .pv@{size}, .p@{size} {
+        margin-top: @size * 1px;
+    }
+    .pb@{size}, .pv@{size}, .p@{size} {
+        margin-bottom: @size * 1px;
+    }
+
+    .make-padding(@size + 5);
+}
+
+/**
+  *************************************
+  * 边框样式预设
+  *************************************
+  */
+.make-border();
+.make-border(@color: #ddd) {
+    .bdlt, .bdh, .bd { border-left: 1px solid @color; }
+    .bdrt, .bdh, .bd { border-right: 1px solid @color; }
+    .bdtp, .bdv, .bd { border-top: 1px solid @color; }
+    .bdbt, .bdv, .bd { border-bottom: 1px solid @color; }
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min-device-pixel-ratio: 2) {
+        .bdlt, .bdh, .bd,
+        .bdrt, .bdh, .bd,
+        .bdtp, .bdv, .bd,
+        .bdbt, .bdv, .bd {
+            @stroke: escape(@color);
+            border: 0 solid @color;
+            border-image: url("./bd.svg?stroke=@{stroke}") 2 2 stretch;
+        }
+
+        .bdlt, .bdh, .bd { border-left-width: 1px; }
+        .bdrt, .bdh, .bd { border-right-width: 1px; }
+        .bdtp, .bdv, .bd { border-top-width: 1px; }
+        .bdbt, .bdv, .bd { border-bottom-width: 1px; }
+    }
+}
+
+
+/**
+ *****************************************
+ * z-index
+ *****************************************
+ */
+.z10 { z-index: 10; }
+.z100 { z-index: 100; }
+.z1000 { z-index: 1000; }
